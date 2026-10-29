@@ -3,11 +3,14 @@ import logoLockup from '../../assets/edabip-logo.png';
 import BrandPanel from './BrandPanel';
 import FloatingLogoBadge from './FloatingLogoBadge';
 
+const SIGN_IN_COPY =
+  'Sign in to access your Enterprise Data Analytics & Business Intelligence Platform and continue making data-driven decisions with confidence';
+
 const COPY = {
   login:
     'Log in to access your Enterprise Data Analytics & Business Intelligence Platform and continue making data-driven decisions with confidence',
-  signup:
-    'Sign in to access your Enterprise Data Analytics & Business Intelligence Platform and continue making data-driven decisions with confidence',
+  signup: SIGN_IN_COPY,
+  verify: SIGN_IN_COPY,
 };
 
 export default function AuthLayout({ variant = 'login', children }) {

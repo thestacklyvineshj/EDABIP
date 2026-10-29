@@ -1,6 +1,13 @@
 node_modules
 dist
+build
+.next
 .env
+.env.*
 *.log
 .DS_Store
 _crops
+.cursor/
+.cursorrules
+.cursorignore
+.cursorindexingignore

@@ -35,21 +35,21 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const [values, setValues] = useState({ email: '', password: '', remember: false });
   const [touched, setTouched] = useState({});
-  const [submitted, setSubmitted] = useState(false);
   const [notice, setNotice] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const errors = validate(values);
-  const isValid = Object.keys(errors).length === 0;
 
   useEffect(() => {
     document.title = 'Login';
   }, []);
 
-  const show = (name) => ((touched[name] || submitted) ? errors[name] : undefined);
+  const show = (name) => (touched[name] ? errors[name] : undefined);
 
   const onChange = (event) => {
     const { name, type, checked, value } = event.target;
     setNotice('');
+    if (name === 'password') setPasswordError('');
     setValues((current) => ({
       ...current,
       [name]: type === 'checkbox' ? checked : value,
@@ -63,10 +63,8 @@ export default function LoginPage() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
     setNotice('');
-    if (!isValid) return;
-    setNotice('You are signed in.');
+    setPasswordError('Your Password worng');
   };
 
   const onForgot = (event) => {
@@ -113,10 +111,12 @@ export default function LoginPage() {
             aria-label="Password"
             autoComplete="current-password"
             borderTone="light"
+            inline
             value={values.password}
             onChange={onChange}
             onBlur={onBlur}
-            error={show('password')}
+            onFocus={() => setPasswordError('')}
+            error={passwordError}
           />
 
           <div className="flex items-center justify-between">
@@ -137,7 +137,7 @@ export default function LoginPage() {
             <p className="text-center text-[0.5625rem] leading-tight text-brand">{notice}</p>
           ) : null}
 
-          <Button type="submit" variant="primary" fullWidth disabled={!isValid}>
+          <Button type="submit" variant="primary" fullWidth>
             Login
           </Button>
         </form>

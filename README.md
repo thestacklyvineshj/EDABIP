@@ -1,6 +1,6 @@
 # EDABIP
 
-Frontend screens for the Enterprise Data Analytics & Business Intelligence Platform. The app is login and signup only. There is no backend, database, or API.
+Frontend screens for the Enterprise Data Analytics & Business Intelligence Platform. The app is login, signup, and verification only. There is no backend, database, or API.
 
 ## Stack
 
@@ -26,6 +26,7 @@ client/
     pages/
       LoginPage.jsx
       SignupPage.jsx
+      VerificationPage.jsx
     components/
       auth/               # layout, brand panel, card, tabs, social buttons
       ui/                 # button, text, password, checkbox, divider
@@ -40,6 +41,8 @@ client/
 | `/` | Redirects to `/login` |
 | `/login` | Login |
 | `/signup` | Signup |
+| `/verify` | Verification code, empty |
+| `/verify/error` | Verification code, error |
 | anything else | Redirects to `/login` |
 
 The Sign up / Log in tabs and the text links switch between the two screens.
@@ -53,7 +56,7 @@ Both screens share `AuthLayout`: a full-page background, the EDABIP logo, a left
 - Email and password are required. Email must look like an email address.
 - Remember me is optional.
 - Forgot Password shows an error until the email is valid, then a local notice that a reset link would be sent.
-- A valid submit shows “You are signed in.”
+- Submit shows the password error inside the field: “Your Password worng”. The Login button stays teal.
 
 **Signup** (`/signup`)
 
@@ -63,7 +66,14 @@ Both screens share `AuthLayout`: a full-page background, the EDABIP logo, a left
 - Terms & Conditions must be checked.
 - A valid submit shows “Your account is ready.”
 
-The primary button stays disabled until the current form is valid. Field errors appear after a field is left, or after Forgot Password is used with an invalid email.
+**Verification** (`/verify` and `/verify/error`)
+
+- Both screens say a 4-digit code was sent to jackie@stackly.com.
+- `/verify` shows four empty boxes with a dot in each. The page title is Verification.
+- `/verify/error` shows `1 1 1 1` in red boxes. The page title is Verification Error.
+- Verify OTP stays disabled. Resend OTP is shown with a 00:00 timer.
+
+The signup button stays disabled until the form is valid. Login stays enabled. Field errors appear after a field is left, or after Forgot Password is used with an invalid email.
 
 ## Run
 
